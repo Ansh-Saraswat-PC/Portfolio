@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greater Noida Microsoft Fabric User Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --fabric-teal: #00b7c3;
+    --fabric-green: #00b294;
+    --fabric-dark-teal: #006e74;
+    --ms-yellow: #ffb900;
+    --ms-blue: #0078d4;
+    --ms-red: #d83b01;
+    --ms-green: #107c10;
+    --surface: #ffffff;
+    --surface-alt: #f8fafb;
+    --border: #e0e4e8;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+    --radius: 8px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+    background: var(--surface-alt);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* ─── TOP NAV ─── */
+  .topnav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .topnav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .ms-logo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .ms-logo span {
+    display: block;
+    border-radius: 1px;
+  }
+  .ms-logo span:nth-child(1) { background: var(--ms-red); }
+  .ms-logo span:nth-child(2) { background: var(--ms-green); }
+  .ms-logo span:nth-child(3) { background: var(--ms-blue); }
+  .ms-logo span:nth-child(4) { background: var(--ms-yellow); }
+
+  .topnav-sep { color: #ccc; }
+  .topnav-links { display: flex; gap: 20px; margin-left: auto; }
+  .topnav-links a { color: var(--text-secondary); text-decoration: none; }
+  .topnav-links a:hover { color: var(--ms-blue); }
+
+  /* ─── HERO BANNER ─── */
+  .hero {
+    background: linear-gradient(135deg, #e8f7f8 0%, #d0f0ee 40%, #e0f5f0 70%, #f0faf8 100%);
+    border-bottom: 3px solid var(--border);
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border: 2px solid rgba(0, 183, 195, 0.15);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 180px; height: 180px;
+    border: 2px solid rgba(0, 178, 148, 0.15);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .hero-logo {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--fabric-teal), var(--fabric-green));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 12px;
+  }
+
+  .fabric-f {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -2px;
+  }
+
+  .hero-group-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fabric-dark-teal);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .hero-content { flex: 1; }
+
+  .hero-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .hero-content h1 span { color: var(--fabric-teal); }
+
+  .hero-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta .badge {
+    background: rgba(0, 183, 195, 0.12);
+    color: var(--fabric-dark-teal);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .hero-desc {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-primary {
+    background: var(--ms-blue);
+    color: white;
+  }
+  .btn-primary:hover { background: #005fa3; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ms-blue);
+    border: 1.5px solid var(--ms-blue);
+  }
+  .btn-outline:hover { background: rgba(0,120,212,0.06); transform: translateY(-1px); }
+
+  .hero-social {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .social-row { display: flex; gap: 8px; }
+
+  .social-btn {
+    width: 40px; height: 40px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .social-li { background: #0077b5; }
+  .social-wa { background: #25d366; }
+  .social-yt { background: #ff0000; }
+  .social-nas { background: #1a1a2e; }
+
+  /* ─── YELLOW ANNOUNCEMENT BAR ─── */
+  .announce-bar {
+    background: var(--ms-yellow);
+    padding: 10px 32px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+  .announce-bar a { color: var(--ms-blue); font-weight: 700; text-decoration: underline; }
+
+  /* ─── BREADCRUMB ─── */
+  .breadcrumb {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 32px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .breadcrumb a { color: var(--ms-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main-container {
+    max-width: 1100px;
+    margin: 20px auto 60px;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* ─── TAB NAV ─── */
+  .tab-nav {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 28px;
+    gap: 0;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .tab.active { color: var(--ms-blue); border-bottom-color: var(--ms-blue); }
+  .tab:hover:not(.active) { color: var(--text-primary); border-bottom-color: var(--border); }
+
+  /* ─── SECTION CARD ─── */
+  .section-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 16px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    align-items: start;
+  }
+  .info-label { color: var(--text-muted); font-weight: 600; }
+  .info-value { color: var(--text-secondary); }
+
+  /* ─── EVENTS ─── */
+  .events-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .event-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .event-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+  .event-img-wrap {
+    height: 200px;
+    background: linear-gradient(135deg, #d0f0ee, #e8f7f8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .event-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .event-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--fabric-teal);
+  }
+
+  .event-img-placeholder .icon {
+    width: 48px;
+    height: 48px;
+    border: 2px dashed var(--fabric-teal);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .event-img-placeholder span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fabric-dark-teal);
+  }
+
+  .event-date-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--ms-blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .event-status-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  .status-completed { background: #107c10; color: white; }
+  .status-upcoming { background: var(--ms-yellow); color: #1a1a2e; }
+
+  .event-info { padding: 20px; flex: 1; }
+  .event-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+  .event-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .event-meta span { display: flex; align-items: center; gap: 4px; }
+  .event-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+  .event-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    background: rgba(0, 120, 212, 0.08);
+    color: var(--ms-blue);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .sidebar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.87rem;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--text-secondary); }
+  .stat-value { font-weight: 700; color: var(--text-primary); }
+
+  .leader-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .leader-item:last-of-type { border-bottom: none; }
+
+  .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fabric-teal), var(--fabric-green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+
+  .leader-name { font-size: 0.87rem; font-weight: 600; color: var(--ms-blue); }
+  .leader-role { font-size: 0.75rem; color: var(--text-muted); }
+
+  .msg-btn {
+    width: 100%;
+    margin-top: 14px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: var(--radius);
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .msg-btn:hover { border-color: var(--ms-blue); color: var(--ms-blue); }
+
+  .member-list { display: flex; flex-direction: column; gap: 2px; }
+  .member-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .member-item:last-child { border-bottom: none; }
+  .member-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a8d8ea, #aa96da);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .member-name { font-size: 0.83rem; font-weight: 600; color: var(--ms-blue); }
+  .member-role { font-size: 0.72rem; color: var(--text-muted); }
+
+  .view-all-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .view-all-row a {
+    font-size: 0.82rem;
+    color: var(--ms-blue);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .view-all-row a:hover { text-decoration: underline; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-primary);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.8rem;
+  }
+  footer a { color: var(--fabric-teal); text-decoration: none; }
+
+  @media (max-width: 860px) {
+    .main-container { grid-template-columns: 1fr; }
+    .hero-inner { flex-direction: column; align-items: flex-start; }
+    .hero-social { align-items: flex-start; }
+  }
+
+  /* Animations */
+  .fade-in { opacity: 0; animation: fadeIn 0.6s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .event-card:nth-child(1) { animation: fadeIn 0.5s ease forwards 0.1s; opacity: 0; }
+  .event-card:nth-child(2) { animation: fadeIn 0.5s ease forwards 0.25s; opacity: 0; }
+  .event-card:nth-child(3) { animation: fadeIn 0.5s ease forwards 0.4s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="topnav-brand" href="#">
+    <div class="ms-logo">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    Microsoft &nbsp;|&nbsp; Fabric Community
+  </a>
+  <div class="topnav-links">
+    <a href="#">Forums</a>
+    <a href="#">Inspiration</a>
+    <a href="#">Ideas</a>
+    <a href="#">Communities</a>
+    <a href="#">Blogs</a>
+    <a href="#">Learning</a>
+    <a href="#">Support</a>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo-wrap">
+      <div class="hero-logo">
+        <span class="fabric-f">F</span>
+      </div>
+      <div class="hero-group-name">Greater Noida<br>Microsoft Fabric<br>User Group</div>
+    </div>
+
+    <div class="hero-content">
+      <h1>Greater Noida <span>Microsoft Fabric</span> User Group</h1>
+      <div class="hero-meta">
+        <span>📍 Greater Noida, Uttar Pradesh</span>
+        <span class="badge">🌱 New &amp; Growing</span>
+      </div>
+      <p class="hero-desc">
+        A local community for data professionals and enthusiasts to learn, share, and collaborate on Microsoft Fabric, Power BI, and modern data analytics — through meetups, workshops, and discussions.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">✦ Join Group</a>
+        <a href="#events" class="btn btn-outline">View Events</a>
+      </div>
+    </div>
+
+    <div class="hero-social">
+      <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Connect With Us</div>
+      <div class="social-row">
+        <a href="#" class="social-btn social-li" title="LinkedIn">in</a>
+        <a href="#" class="social-btn social-wa" title="WhatsApp">W</a>
+        <a href="#" class="social-btn social-yt" title="YouTube">▶</a>
+        <a href="#" class="social-btn social-nas" title="NAS.io">N</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  🎯 Get Microsoft Fabric certified for FREE! Don't miss your chance — <a href="#">Learn more</a>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Microsoft Fabric Community</a>
+  <span>›</span>
+  <a href="#">Fabric User Groups</a>
+  <span>›</span>
+  Greater Noida Microsoft Fabric User Group
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-container">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <!-- Tab nav -->
+    <div class="tab-nav">
+      <a href="#" class="tab active">Group info</a>
+      <a href="#" class="tab">Discussion</a>
+      <a href="#" class="tab">Members</a>
+      <a href="#events" class="tab">Events</a>
+      <a href="#" class="tab">Resources</a>
+    </div>
+
+    <!-- Group Info -->
+    <div class="section-card fade-in">
+      <h2>Group Info</h2>
+      <div class="info-row">
+        <span class="info-label">Location</span>
+        <span class="info-value">Greater Noida, Uttar Pradesh, India</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Details</span>
+        <span class="info-value">
+          Greater Noida Microsoft Fabric User Group is a local community for data professionals and enthusiasts to learn, share, and collaborate on Microsoft Fabric, Power BI, and modern data analytics through meetups, workshops, and discussions.
+        </span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Group leaders</span>
+        <span class="info-value">To be announced</span>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div id="events" class="section-card">
+      <h2>📅 Past Events</h2>
+      <div class="events-list">
+
+        <!-- Event 1 -->
+        <div class="event-card">
+          <div class="event-img-wrap">
+            <!-- Replace src below with your actual event image path -->
+            <!-- <img src="images/event1.jpg" alt="Launch Meetup"> -->
+            <div class="event-img-placeholder">
+              <div class="icon">🖼</div>
+              <span>Add event photo here</span>
+            </div>
+            <span class="event-date-badge">Jan 2025</span>
+            <span class="event-status-badge status-completed">✓ Completed</span>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Inaugural Meetup — Introduction to Microsoft Fabric</div>
+            <div class="event-meta">
+              <span>📅 January 18, 2025</span>
+              <span>📍 Greater Noida</span>
+              <span>👥 ~30 attendees</span>
+            </div>
+            <p class="event-desc">
+              Our first community gathering! We introduced Microsoft Fabric, its core components — OneLake, Data Factory, Synapse, and Power BI — and shared the vision for our local group. A fantastic turnout with great energy and discussions.
+            </p>
+            <div class="event-tags">
+              <span class="tag">Microsoft Fabric</span>
+              <span class="tag">Introduction</span>
+              <span class="tag">Networking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-card">
+          <div class="event-img-wrap">
+            <!-- Replace src below with your actual event image path -->
+            <!-- <img src="images/event2.jpg" alt="Power BI Workshop"> -->
+            <div class="event-img-placeholder">
+              <div class="icon">🖼</div>
+              <span>Add event photo here</span>
+            </div>
+            <span class="event-date-badge">Feb 2025</span>
+            <span class="event-status-badge status-completed">✓ Completed</span>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Workshop — Power BI + Fabric Integration Deep Dive</div>
+            <div class="event-meta">
+              <span>📅 February 15, 2025</span>
+              <span>📍 Greater Noida</span>
+              <span>👥 ~45 attendees</span>
+            </div>
+            <p class="event-desc">
+              A hands-on workshop exploring how Power BI integrates natively within the Microsoft Fabric ecosystem. Attendees built end-to-end dashboards using Lakehouse data and explored Direct Lake mode for real-time analytics.
+            </p>
+            <div class="event-tags">
+              <span class="tag">Power BI</span>
+              <span class="tag">Lakehouse</span>
+              <span class="tag">Hands-on</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="event-card">
+          <div class="event-img-wrap">
+            <!-- Replace src below with your actual event image path -->
+            <!-- <img src="images/event3.jpg" alt="Data Engineering"> -->
+            <div class="event-img-placeholder">
+              <div class="icon">🖼</div>
+              <span>Add event photo here</span>
+            </div>
+            <span class="event-date-badge">Mar 2025</span>
+            <span class="event-status-badge status-completed">✓ Completed</span>
+          </div>
+          <div class="event-info">
+            <div class="event-title">Data Engineering with Fabric Pipelines &amp; Notebooks</div>
+            <div class="event-meta">
+              <span>📅 March 8, 2025</span>
+              <span>📍 Greater Noida</span>
+              <span>👥 ~50 attendees</span>
+            </div>
+            <p class="event-desc">
+              A session focused on building robust data pipelines using Fabric Data Factory and Spark Notebooks. We covered medallion architecture, incremental loads, and best practices for data engineering in the Fabric era.
+            </p>
+            <div class="event-tags">
+              <span class="tag">Data Factory</span>
+              <span class="tag">Spark</span>
+              <span class="tag">Data Engineering</span>
+              <span class="tag">Medallion</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Discussion placeholder -->
+    <div class="section-card">
+      <h2>💬 Discussion</h2>
+      <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;">
+        Join the group to participate in discussions and connect with fellow members.
+      </p>
+      <a href="#" class="btn btn-outline" style="margin-top:16px;display:inline-flex;">Join to Participate →</a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Stats -->
+    <div class="sidebar-card fade-in">
+      <h3>📊 Group Stats</h3>
+      <div class="stat-row">
+        <span class="stat-label">Total Members</span>
+        <span class="stat-value">Growing!</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Events Held</span>
+        <span class="stat-value">3</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Location</span>
+        <span class="stat-value">Greater Noida, UP</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Founded</span>
+        <span class="stat-value">2025</span>
+      </div>
+    </div>
+
+    <!-- Leaders -->
+    <div class="sidebar-card">
+      <h3>👑 Group Leaders</h3>
+      <div class="leader-item">
+        <div class="avatar">?</div>
+        <div>
+          <div class="leader-name">To Be Announced</div>
+          <div class="leader-role">Group Leader</div>
+        </div>
+      </div>
+      <div class="leader-item">
+        <div class="avatar">?</div>
+        <div>
+          <div class="leader-name">Co-Organizer</div>
+          <div class="leader-role">Advocate</div>
+        </div>
+      </div>
+      <button class="msg-btn">✉ Message Leaders</button>
+    </div>
+
+    <!-- Members -->
+    <div class="sidebar-card">
+      <h3>🧑‍💻 Members</h3>
+      <div class="member-list">
+        <div class="member-item">
+          <div class="member-avatar">M1</div>
+          <div>
+            <div class="member-name">Member 1</div>
+            <div class="member-role">New Member</div>
+          </div>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar">M2</div>
+          <div>
+            <div class="member-name">Member 2</div>
+            <div class="member-role">New Member</div>
+          </div>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar">M3</div>
+          <div>
+            <div class="member-name">Member 3</div>
+            <div class="member-role">New Member</div>
+          </div>
+        </div>
+      </div>
+      <div class="view-all-row">
+        <a href="#">View all members</a>
+        <a href="#">+ Invite people</a>
+      </div>
+    </div>
+
+    <!-- Join CTA -->
+    <div class="sidebar-card" style="background:linear-gradient(135deg,#e8f7f8,#d0f0ee);border-color:var(--fabric-teal);">
+      <h3 style="color:var(--fabric-dark-teal);">🚀 Join Us!</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:16px;line-height:1.6;">
+        Be part of Greater Noida's growing Microsoft Fabric community. All skill levels welcome!
+      </p>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Join Group Free</a>
+    </div>
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Greater Noida Microsoft Fabric User Group · Part of the <a href="#">Microsoft Fabric Community</a></p>
+  <p style="margin-top:6px;">📍 Greater Noida, Uttar Pradesh, India</p>
+</footer>
+
+</body>
+</html>
