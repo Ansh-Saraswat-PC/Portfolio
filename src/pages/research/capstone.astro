@@ -1,0 +1,140 @@
+---
+// src/pages/research/capstone.astro
+---
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Striking Distance: Predictive Scoring for SEO Content Recovery</title>
+</head>
+<body class="bg-[#0a0a0a] text-gray-300 font-sans min-h-screen selection:bg-blue-500 selection:text-white">
+    
+    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+        
+        <!-- Header -->
+        <header class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                Striking Distance: Predictive Scoring for SEO Content Recovery
+            </h1>
+            <div class="flex items-center text-sm text-gray-500 space-x-4">
+                <span>Author: Ansh Saraswat</span>
+                <span>•</span>
+                <span>Lane: Refresh / Opportunity Scoring</span>
+                <span>•</span>
+                <span>October 2026</span>
+            </div>
+        </header>
+
+        <!-- Abstract -->
+        <section class="mb-12 p-6 bg-gray-900/50 border border-gray-800 rounded-xl">
+            <h2 class="text-xl font-semibold text-white mb-3">Abstract</h2>
+            <p class="leading-relaxed">
+                This research investigates whether predictive machine learning can outperform manual heuristic rules in identifying decaying SEO content. We utilized 79 million rows of daily search performance data to compare a manual "volume-to-position" baseline against a Random Forest classifier. By evaluating both on a strict client-grouped split to prevent data leakage, the Random Forest demonstrated significantly higher precision in identifying pages with severe impression-to-click disparities. The output is a prioritized action queue that enables editorial teams to target high-ROI content refreshes efficiently.
+            </p>
+        </section>
+
+        <!-- Content -->
+        <article class="space-y-12">
+            
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">1. Introduction & Problem Statement</h2>
+                <p class="leading-relaxed">
+                    Content teams frequently waste editorial bandwidth rewriting pages that have reached their natural click ceiling, while ignoring high-volume pages trapped on the second page of search results. This project builds a decision-support engine to score and rank "refresh opportunities," replacing manual spreadsheet sorting with a validated predictive model.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">2. Data & Safety</h2>
+                <p class="leading-relaxed mb-4">
+                    The analysis relies on the <code class="text-blue-400 bg-blue-900/20 px-1.5 py-0.5 rounded">fact_content_daily_performance</code> table for March 2026, sourced from the FlyRank ML dataset.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                    <li><strong class="text-gray-200">Metrics Used:</strong> Google Search Console (impressions, clicks, avg_position) and Google Analytics 4 (sessions_organic).</li>
+                    <li><strong class="text-gray-200">Exclusions:</strong> Rows with zero impressions were excluded to focus strictly on ranking URLs.</li>
+                    <li><strong class="text-gray-200">Leakage Prevention:</strong> To prevent data leakage, we avoided proprietary FlyRank health scores or future-window target labels. Data was grouped securely by <code class="text-blue-400 bg-blue-900/20 px-1.5 py-0.5 rounded">client_hash_id</code>.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">3. Methodology</h2>
+                <ul class="list-none space-y-4">
+                    <li class="bg-gray-900/30 p-4 rounded-lg border border-gray-800">
+                        <strong class="text-white block mb-1">Target Definition</strong>
+                        A binary proxy label for 'Refresh Opportunity' was created (impressions > median AND CTR < 0.01).
+                    </li>
+                    <li class="bg-gray-900/30 p-4 rounded-lg border border-gray-800">
+                        <strong class="text-white block mb-1">Baseline</strong>
+                        A heuristic rule calculating Impressions / Avg Position to reward high-volume, striking-distance pages.
+                    </li>
+                    <li class="bg-gray-900/30 p-4 rounded-lg border border-gray-800">
+                        <strong class="text-white block mb-1">Validation Design</strong>
+                        A <code class="text-blue-400">GroupShuffleSplit</code> on client_hash_id prevents the model from memorizing domain-specific ranking patterns.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">4. Results</h2>
+                <p class="leading-relaxed mb-6">
+                    Evaluated on the strictly isolated test set, the Random Forest model outperformed the heuristic baseline. While the baseline blindly prioritized high-impression navigational queries regardless of their click-through potential, the ML model successfully balanced volume against engagement metrics to isolate true underperformers.
+                </p>
+                
+                <!-- Chart Injection -->
+                <figure class="my-8">
+                    <img src="/fig2_precision_at_k.png" alt="Precision at K vs Baseline" class="w-full rounded-xl border border-gray-800 shadow-2xl" />
+                    <figcaption class="text-sm text-gray-500 mt-3 text-center">Figure 1: Precision@K comparing the Random Forest against the Baseline.</figcaption>
+                </figure>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">5. Limitations & Honest Framing</h2>
+                <p class="leading-relaxed mb-4">
+                    This model provides a <strong class="text-white">directional, decision-support signal</strong>. It observes past decay but cannot guarantee future algorithmic movement.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                    <li><strong class="text-gray-200">Navigational Traps:</strong> It can falsely flag brand-specific queries where a competitor owns the intent.</li>
+                    <li><strong class="text-gray-200">Seasonality:</strong> The model cannot distinguish between broken content and a natural off-season drop.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-white mb-4 border-b border-gray-800 pb-2">6. Ranked Recommendations</h2>
+                <p class="leading-relaxed mb-6">
+                    The playbook maps the model probabilities to human actions:
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="p-4 border-t-4 border-red-500 bg-gray-900/50 rounded-b-lg">
+                        <strong class="text-white block mb-2">Priority Refresh</strong>
+                        <span class="text-sm text-gray-400">Prob > 0.70. Immediate editorial rewrite required.</span>
+                    </div>
+                    <div class="p-4 border-t-4 border-yellow-500 bg-gray-900/50 rounded-b-lg">
+                        <strong class="text-white block mb-2">Review Metadata</strong>
+                        <span class="text-sm text-gray-400">Prob 0.50 - 0.70. Check title tags and meta descriptions.</span>
+                    </div>
+                    <div class="p-4 border-t-4 border-gray-500 bg-gray-900/50 rounded-b-lg">
+                        <strong class="text-white block mb-2">Monitor</strong>
+                        <span class="text-sm text-gray-400">Prob < 0.50. Standard performance, no action needed.</span>
+                    </div>
+                </div>
+
+                <figure class="my-8">
+                    <img src="/fig3_action_matrix.png" alt="Editorial Action Matrix" class="w-full rounded-xl border border-gray-800 shadow-2xl" />
+                </figure>
+            </section>
+
+        </article>
+
+        <!-- Footer / Reproducibility -->
+        <footer class="mt-20 pt-8 border-t border-gray-800 text-sm text-gray-500 space-y-4">
+            <p>
+                <strong>Reproducibility:</strong> All code, queries, and validation splits are available on GitHub.
+            </p>
+            <p>
+                <strong>Acknowledgments:</strong> Built on the FlyRank ML Internship dataset. Data provided by <a href="https://flyrank.ai" class="text-blue-400 hover:underline" target="_blank">FlyRank</a>.
+            </p>
+        </footer>
+
+    </main>
+</body>
+</html>
