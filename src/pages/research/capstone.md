@@ -2,7 +2,7 @@
 title: "Striking Distance: Predictive Scoring for SEO Content Recovery"
 description: "An analysis of predictive machine learning vs heuristic rules for identifying decaying SEO content."
 date: "2026-10-11"
-layout: "../../layouts/MainLayout.astro" # Adjust this to your actual layout path
+layout: "../../layouts/Layout.astro" # Adjust this to your actual layout path
 ---
 
 # Striking Distance: Predictive Scoring for SEO Content Recovery
